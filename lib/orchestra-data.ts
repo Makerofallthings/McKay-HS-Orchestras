@@ -2,14 +2,14 @@ export const ensembleNames = ['Advanced Symphony', 'Chamber Ensemble', 'Symphony
 export const slugify = (name: string) => name.toLowerCase().replaceAll(' ', '-');
 export type Section = { id:string; name:string; color:string; count:number; rows:number[] };
 const sections = [
- {id:'violin1',name:'1st Violins',color:'#45c2ff',count:8,rows:[2,2,2,2]},
+ {id:'violin1',name:'1st Violins',color:'#45c2ff',count:4,rows:[2,2]},
  {id:'violin2',name:'2nd Violins',color:'#4e78ff',count:10,rows:[2,4,4]},
  {id:'viola',name:'Violas',color:'#be77ff',count:5,rows:[2,3]},
  {id:'cello',name:'Cellos',color:'#df9a4b',count:6,rows:[2,2,2]},
  {id:'bass',name:'Basses',color:'#983c5d',count:4,rows:[4]},
 ];
 // User-requested demonstration seating, shared across the five ensemble pages.
-// Basses sit four across behind the violas.
+// Basses form a diagonal line beginning beside the middle viola in row two.
 export const ensembles = ensembleNames.map(name=>({name,slug:slugify(name),sections:sections.map(s=>({...s,rows:[...s.rows]}))}));
 export type Concert = {id:string;title:string;start:string;end:string;location:string};
 export const concerts:Concert[]=[
