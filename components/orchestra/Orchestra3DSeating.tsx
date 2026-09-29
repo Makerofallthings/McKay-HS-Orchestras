@@ -7,7 +7,6 @@ import { Color, OrthographicCamera, NoToneMapping, CanvasTexture, SRGBColorSpace
 import type { Section } from '@/lib/orchestra-data';
 import { createSeats, conductorZ, sectionLayout, type Seat } from '@/lib/seating';
 import ConcertHall from './ConcertHall';
-import SeatRoster, {useSeatRoster} from './SeatRoster';
 
 export { createSeats } from '@/lib/seating';
 const PRINCIPAL_RED = '#ff404b';
@@ -46,13 +45,12 @@ function StageLabel({text,color,position}:{text:string;color:string;position:[nu
   </sprite>:null;
 }
 
-function Chair({ seat, color, dimmed, onHover, onLeave, onSelect }: {
+function Chair({ seat, color, dimmed, onHover, onLeave }: {
   seat: Seat;
   color: string;
   dimmed: boolean;
   onHover: (seat: Seat | null) => void;
   onLeave: (seat: Seat) => void;
-  onSelect: (seat: Seat) => void;
 }) {
   const principal = seat.role === 'Principal';
   // Principals remain red even while another section is isolated.
@@ -78,11 +76,21 @@ function Chair({ seat, color, dimmed, onHover, onLeave, onSelect }: {
     </mesh>}
     {/* One stable raycast target prevents flicker between seat/back/leg meshes. */}
     <mesh position={[0,.72,0]} onPointerOver={hover} onPointerMove={hover}
-      onPointerOut={()=>onLeave(seat)} onClick={event=>{event.stopPropagation();if(event.delta<=5)onSelect(seat)}}>
+      onPointerOut={()=>onLeave(seat)}>
       <boxGeometry args={[.83,1.46,.86]}/>
       <meshBasicMaterial transparent opacity={0} depthWrite={false}/>
     </mesh>
   </group>;
+}
+
+function InstrumentIcon({sectionId}:{sectionId:string}) {
+  const tall=sectionId==='cello'||sectionId==='bass';
+  const doubleBass=sectionId==='bass';
+  return <svg className={'instrument-icon '+(tall?'instrument-icon-tall':'')} viewBox="0 0 24 24" aria-hidden="true">
+    <path d={tall?'M13 2v10.1c2.5.8 3.9 2.8 3.9 5.2 0 2.6-1.8 4.7-4.2 4.7s-4.2-2.1-4.2-4.7c0-2.4 1.4-4.4 3.9-5.2V2':'M13 2v6.6c2.2.7 3.5 2.5 3.5 4.6 0 2.3-1.6 4.2-3.9 4.2s-3.9-1.9-3.9-4.2c0-2.1 1.3-3.9 3.5-4.6V2'} />
+    <path d="M10.5 4.5h5M10 7h6M10 10h6" />
+    {doubleBass&&<path d="M6 20h13" />}
+  </svg>;
 }
 
 class StageBoundary extends Component<{children:ReactNode},{failed:boolean}> {
@@ -92,8 +100,6 @@ class StageBoundary extends Component<{children:ReactNode},{failed:boolean}> {
 }
 
 export default function Orchestra3DSeating({sections,ensembleId='default'}:{sections:Section[];ensembleId?:string}) {
-  const [selectedSeat,setSelectedSeat] = useState<Seat|null>(null);
-  const {roster,save,error}=useSeatRoster(ensembleId);
   const [hoveredSeat,setHoveredSeat] = useState<Seat|null>(null);
   const [hoveredSection,setHoveredSection] = useState<string|null>(null);
   const [selected,setSelected] = useState<string|null>(null);
@@ -121,10 +127,7 @@ export default function Orchestra3DSeating({sections,ensembleId='default'}:{sect
   const seats = useMemo(()=>createSeats(sections),[sections]);
   const active = selected ?? hoveredSection ?? hoveredSeat?.sectionId;
   const focus = sections.find(section=>section.id===active);
-  const select = (id:string) => {clearHover();setSelectedSeat(null);setHoveredSection(null);setSelected(previous=>previous===id?null:id);};
-  const selectSeat=(seat:Seat)=>{clearHover();setHoveredSection(null);setSelected(seat.sectionId);setSelectedSeat(seat);};
-  const detailSeat=hoveredSeat?.sectionId===active?hoveredSeat:selectedSeat;
-  const player=detailSeat?roster[detailSeat.id]:undefined;
+  const select = (id:string) => {clearHover();setHoveredSection(null);setSelected(previous=>previous===id?null:id);};
 
   useEffect(()=>{
     const context=(document as Document & {modelContext?:{registerTool:(tool:unknown,options:unknown)=>unknown}}).modelContext;
@@ -163,26 +166,24 @@ export default function Orchestra3DSeating({sections,ensembleId='default'}:{sect
         <StageLabel text="CONDUCTOR" color="#d1c4a5" position={[0,.15,conductorZ+1.2]}/>
         {focus&&<StageLabel text={focus.name} color={focus.color} position={focus.id==='bass'?[2.5,1.6,-4.9]:sectionLayout[focus.id].label}/>}
         {seats.map(seat=><Chair key={seat.id} seat={seat} color={sections.find(s=>s.id===seat.sectionId)!.color}
-          dimmed={!!active&&active!==seat.sectionId} onHover={enterSeat} onLeave={leaveSeat} onSelect={selectSeat}/>)}
+          dimmed={!!active&&active!==seat.sectionId} onHover={enterSeat} onLeave={leaveSeat}/>)}
         <OrbitControls makeDefault target={[0,1,-1.3]} enablePan={false} enableDamping={false}
           minZoom={12} maxZoom={85} minPolarAngle={.2} maxPolarAngle={Math.PI/2}
           onStart={()=>{dragging.current=true;clearHover();}} onEnd={()=>{dragging.current=false;}}/>
       </Canvas></StageBoundary>
       <div className="stage-tip" role="status" aria-live="polite">
         <strong>{focus?`${focus.name} · ${focus.count} members`:'A clearer view of every section.'}</strong>
-        <span>{detailSeat?`${player?`${player.name} · Grade ${player.grade}`:'Unassigned player'} · Seat ${detailSeat.number} · ${detailSeat.role}`:focus?`${selected?'Pinned · ':''}Rows: ${focus.rows.join(' – ')}`:'Hover a chair or select an instrument below.'}</span>
+        <span>{focus?`${selected?'Pinned · ':''}Rows: ${focus.rows.join(' – ')}`:'Hover a chair or select an instrument below.'}</span>
       </div>
-      <span className="stage-hint">Drag to orbit · Scroll to zoom · Tap a chair for player details</span>
+      <span className="stage-hint">Drag to orbit · Scroll to zoom · Hover a chair to explore</span>
     </div>
     <div className="stage-legend" aria-label="Instrument sections">
       {sections.map(section=><button key={section.id} aria-pressed={selected===section.id}
         onClick={()=>select(section.id)} onMouseEnter={()=>{clearHover();setHoveredSection(section.id);}} onMouseLeave={()=>setHoveredSection(null)}>
-        <i style={{background:section.color}}/>{section.name} <span className="ml-2 opacity-70">{section.count}</span>
+        <i style={{background:section.color}}/><InstrumentIcon sectionId={section.id}/><span className="stage-section-name">{section.name}</span><span className="stage-section-count">{section.count}</span>
       </button>)}
-      <button onClick={()=>{setSelected(null);setSelectedSeat(null);setHoveredSection(null);clearHover();setReset(value=>value+1);}}>Reset view</button>
+      <button onClick={()=>{setSelected(null);setHoveredSection(null);clearHover();setReset(value=>value+1);}}>Reset view</button>
     </div>
-    <label className="block text-sm my-3">Player details <select className="ml-3 rounded border border-white/20 bg-[#17251e] p-2 max-w-full" aria-label="Select a seat for player details" value={selectedSeat?.id||''} onChange={event=>{const seat=seats.find(s=>s.id===event.target.value);if(seat)selectSeat(seat);else setSelectedSeat(null);}}><option value="">Choose a chair…</option>{seats.map(seat=><option key={seat.id} value={seat.id}>{sections.find(s=>s.id===seat.sectionId)?.name} · Seat {seat.number}{roster[seat.id]?` · ${roster[seat.id].name}`:''}</option>)}</select></label>
-    {selectedSeat&&<SeatRoster key={selectedSeat.id} seat={selectedSeat} player={roster[selectedSeat.id]} onSave={save} error={error} onClose={()=>setSelectedSeat(null)}/>}
     <div className="seat-key"><span><i style={{background:PRINCIPAL_RED}}/>Principal · front outside chair</span><span><i className="co-principal-mark"/>Co-principal · adjacent chair, cream stripe</span></div>
   </div>;
 }
