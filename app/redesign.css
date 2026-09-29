@@ -95,7 +95,7 @@ footer{background:#0d1017;border-color:var(--line)}.footer-bottom{border-color:v
 
 /* More compact navigation and a continuous photographic hero. */
 .site-header .navigation{justify-content:center;gap:clamp(22px,3vw,48px)}
-.hero-photo{inset:0;background-image:url('/images/mckay-rehearsal.jpg');background-position:center 55%;opacity:1}
+.hero-photo{inset:0;background-position:center 55%;opacity:1}
 .hero-shade{background:linear-gradient(90deg,#101218f5 0%,#101218e8 25%,#101218c7 43%,#10121870 65%,#10121826 100%),linear-gradient(0deg,#101218e6 0%,transparent 40%,#10121855 100%)}
 .hero h1{text-shadow:0 2px 20px #0005}.hero-intro{color:#e2e4e8!important}.hero-facts span{color:#d2d7e1}
 footer{padding:36px 6.4% 24px}.footer-bottom{padding:20px 320px 0 0;min-height:58px;align-items:center}.partners{margin-top:28px;margin-bottom:28px}

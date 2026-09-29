@@ -28,6 +28,8 @@ jobs:
       - name: Install dependencies
         run: npm install --no-audit --no-fund
       - name: Build static site
+        env:
+          NEXT_PUBLIC_BASE_PATH: /McKay-HS-Orchestras
         run: npm run build:github
       - name: Configure Pages
         uses: actions/configure-pages@v5

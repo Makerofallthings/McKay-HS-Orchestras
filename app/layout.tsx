@@ -4,6 +4,8 @@ import "./redesign.css";
 import { AudioPlayer } from "@/components/orchestra/Features";
 import RouteScroll from "@/components/orchestra/RouteScroll";
 
+const siteBasePath = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
+
 export const metadata: Metadata = {
   title: "McKay High School Orchestras | Many musicians. One sound.",
   description: "Discover McKay High School's five orchestras, concerts, and musical community in Salem, Oregon.",
@@ -11,8 +13,8 @@ export const metadata: Metadata = {
     "codex-preview": "development",
   },
   icons: {
-    icon: "/favicon.svg",
-    shortcut: "/favicon.svg",
+    icon: `${siteBasePath}/favicon.svg`,
+    shortcut: `${siteBasePath}/favicon.svg`,
   },
 };
 

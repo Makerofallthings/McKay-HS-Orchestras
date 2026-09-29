@@ -1,6 +1,7 @@
 'use client';
 import { schoolDetails } from '@/lib/elementary-classes';
 import {useState} from 'react';
+import {assetPath} from '@/lib/assets';
 export function SchoolClassInformation({school,onClose}:{school:string;onClose:()=>void}){
  const info=schoolDetails[school];
  const [showOriginal,setShowOriginal]=useState(false);
@@ -15,7 +16,7 @@ export function SchoolClassInformation({school,onClose}:{school:string;onClose:(
     <p className="class-start">Listed start: {item.starts}</p>
   </article>)}</div>
   {info.transport&&<div className="transport-details"><h4>Getting to orchestra & home</h4>{info.transport.map(line=><p key={line}>{line}</p>)}</div>}
-  <div className="resource-actions class-sheet-actions"><a className="button primary" href={'/documents/elementary/'+school.toLowerCase()+'.pdf'} download>Download original class sheet ↓</a><button className="button" aria-expanded={showOriginal} aria-controls="original-class-sheet" onClick={()=>setShowOriginal(value=>!value)}>{showOriginal?'Hide':'View'} original class sheet {showOriginal?'−':'+'}</button></div>
-  {showOriginal&&<div id="original-class-sheet" className="class-sheet-viewer"><iframe title={school+' original class sheet'} src={'/documents/elementary/'+school.toLowerCase()+'.pdf'}/></div>}
+  <div className="resource-actions class-sheet-actions"><a className="button primary" href={assetPath('/documents/elementary/'+school.toLowerCase()+'.pdf')} download>Download original class sheet ↓</a><button className="button" aria-expanded={showOriginal} aria-controls="original-class-sheet" onClick={()=>setShowOriginal(value=>!value)}>{showOriginal?'Hide':'View'} original class sheet {showOriginal?'−':'+'}</button></div>
+  {showOriginal&&<div id="original-class-sheet" className="class-sheet-viewer"><iframe title={school+' original class sheet'} src={assetPath('/documents/elementary/'+school.toLowerCase()+'.pdf')}/></div>}
  </section>
 }

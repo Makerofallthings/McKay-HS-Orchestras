@@ -9,12 +9,13 @@ import elementary from '@/lib/elementary-links.json';
 import mascots from '@/lib/school-mascots.json';
 const schoolMascots:Record<string,{src:string;alt:string}>=mascots;
 import { SchoolClassInformation } from './SchoolClassInformation';
+import {assetPath} from '@/lib/assets';
 
 export function HandbookContent(){
   return <>
     <div className="resource-intro"><span className="eyebrow">THE STUDENT & FAMILY GUIDE</span><h1>Orchestra Handbook</h1><p>Instruments, rehearsals, performances, and being part of the McKay orchestra community—all in one place.</p></div>
     <div className="edition-note"><BookOpen size={22}/><div><strong>2021–2022 edition · Archived handbook</strong><p>This is the edition published on the original website. Dates and grading policies below are historical. Contact the director for the current year’s requirements.</p></div></div>
-    <div className="resource-actions"><a className="button primary" href="/documents/mckay-handbook-2021-22.pdf" download><Download size={16}/> Download original PDF</a><Link className="button" href="/resources/contact">Ask the director <ArrowUpRight size={16}/></Link></div>
+    <div className="resource-actions"><a className="button primary" href={assetPath('/documents/mckay-handbook-2021-22.pdf')} download><Download size={16}/> Download original PDF</a><Link className="button" href="/resources/contact">Ask the director <ArrowUpRight size={16}/></Link></div>
     <HandbookReader/>
   </>;
 }
@@ -35,7 +36,7 @@ export function ElementaryContent(){
  },[school,selection]);
  return <>
    <div className="resource-intro"><span className="eyebrow">ELEMENTARY ORCHESTRAS</span><h1>First notes.<br/><em>Endless possibilities.</em></h1><p>Find your school’s class information, hear the instruments, and get ready to make music.</p></div>
-   <section className="school-section"><div className="section-heading"><div><span className="eyebrow">START WITH YOUR SCHOOL</span><h2>Find your orchestra class.</h2></div></div><div className="school-grid">{elementary.schools.map(item=><button key={item.label} onClick={()=>{setSchool(item.label);setSelection(value=>value+1);}} aria-pressed={school===item.label}><span className="school-mascot"><img src={schoolMascots[item.label].src} alt={schoolMascots[item.label].alt} width={64} height={64} loading="lazy"/></span><span className="school-card-name">{item.label.charAt(0)+item.label.slice(1).toLowerCase()}<small>Elementary orchestra</small></span><ArrowUpRight size={17}/></button>)}</div>{school&&<div ref={classCard} style={{scrollMarginTop:24}}><SchoolClassInformation key={school} school={school} onClose={()=>setSchool(null)}/></div>}</section>
+   <section className="school-section"><div className="section-heading"><div><span className="eyebrow">START WITH YOUR SCHOOL</span><h2>Find your orchestra class.</h2></div></div><div className="school-grid">{elementary.schools.map(item=><button key={item.label} onClick={()=>{setSchool(item.label);setSelection(value=>value+1);}} aria-pressed={school===item.label}><span className="school-mascot"><img src={assetPath(schoolMascots[item.label].src)} alt={schoolMascots[item.label].alt} width={64} height={64} loading="lazy"/></span><span className="school-card-name">{item.label.charAt(0)+item.label.slice(1).toLowerCase()}<small>Elementary orchestra</small></span><ArrowUpRight size={17}/></button>)}</div>{school&&<div ref={classCard} style={{scrollMarginTop:24}}><SchoolClassInformation key={school} school={school} onClose={()=>setSchool(null)}/></div>}</section>
    <section className="instrument-section"><span className="eyebrow">FIND YOUR SOUND</span><h2>Hear the instruments.</h2><p>Explore the demonstration videos selected by the orchestra program.</p><Tabs defaultValue="VIOLIN"><TabsList className="h-auto flex-wrap justify-start gap-2 p-2 mt-5">{elementary.videos.map(video=><TabsTrigger className="px-5 py-3" value={video.label} key={video.label}>{video.label.charAt(0)+video.label.slice(1).toLowerCase()}</TabsTrigger>)}</TabsList>{elementary.videos.map(video=><TabsContent value={video.label} key={video.label}><iframe className="instrument-video" src={'https://www.youtube-nocookie.com/embed/'+video.url.split('/').pop()} title={video.label+' demonstration'} loading="lazy" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen/><a className="under-link mt-4" href={video.url} target="_blank" rel="noreferrer">Watch {video.label.toLowerCase()} demonstration on YouTube ↗</a></TabsContent>)}</Tabs></section>
    <RentalResources/>
  </>;

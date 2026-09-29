@@ -1,6 +1,7 @@
 'use client';
 import {useRef,useState} from 'react';
 import {handbookSections,historicalConcerts} from '@/lib/handbook';
+import {assetPath} from '@/lib/assets';
 import {Accordion,AccordionItem,AccordionTrigger,AccordionContent} from '@/components/ui/accordion';
 
 export default function HandbookReader(){
@@ -14,9 +15,10 @@ export default function HandbookReader(){
   <div className="handbook-reader">
    <span className="chapter-number">PAGE {page+1} OF {titles.length}</span><h2 ref={heading} tabIndex={-1}>{titles[page]}</h2>
    <div className="handbook-chapters">
-    {chapter?<section key={chapter.id}>{chapter.paragraphs.map(p=><p key={p}>{p}</p>)}{chapter.items&&<ul>{chapter.items.map(item=><li key={item}>{item}</li>)}</ul>}</section>:page===handbookSections.length?<section><p>These dates belong to the archived 2021–2022 edition. For upcoming performances, use the <a href="/#calendar" className="underline">live calendar</a>.</p><Accordion type="single" collapsible><AccordionItem value="dates"><AccordionTrigger>Show historical concert schedule</AccordionTrigger><AccordionContent>{historicalConcerts.map(([date,title])=><div className="historical-event" key={date}><span>{date}</span><strong>{title}</strong></div>)}</AccordionContent></AccordionItem></Accordion></section>:<div className="embedded-document"><p>The complete original nine-page document.</p><iframe src="/documents/mckay-handbook-2021-22.pdf" title="Original 2021–2022 McKay orchestra handbook" loading="lazy"/></div>}
+    {chapter?<section key={chapter.id}>{chapter.paragraphs.map(p=><p key={p}>{p}</p>)}{chapter.items&&<ul>{chapter.items.map(item=><li key={item}>{item}</li>)}</ul>}</section>:page===handbookSections.length?<section><p>These dates belong to the archived 2021–2022 edition. For upcoming performances, use the <a href="/#calendar" className="underline">live calendar</a>.</p><Accordion type="single" collapsible><AccordionItem value="dates"><AccordionTrigger>Show historical concert schedule</AccordionTrigger><AccordionContent>{historicalConcerts.map(([date,title])=><div className="historical-event" key={date}><span>{date}</span><strong>{title}</strong></div>)}</AccordionContent></AccordionItem></Accordion></section>:<div className="embedded-document"><p>The complete original nine-page document.</p><iframe src={assetPath('/documents/mckay-handbook-2021-22.pdf')} title="Original 2021–2022 McKay orchestra handbook" loading="lazy"/></div>}
    </div>
    <nav className="handbook-pagination" aria-label="Handbook pages"><button className="button" disabled={page===0} onClick={()=>go(page-1)}>← Previous</button><span className="handbook-page-count">Page {page+1} of {titles.length}</span><button className="button primary" disabled={page===titles.length-1} onClick={()=>go(page+1)}>Next →</button></nav>
   </div>
  </div>;
 }
+

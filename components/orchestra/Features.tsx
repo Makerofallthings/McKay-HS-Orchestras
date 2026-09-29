@@ -5,6 +5,7 @@ import { ArrowUpRight,Heart,Play,Pause,SkipForward,CalendarDays } from 'lucide-r
 import { Dialog,DialogContent,DialogTitle,DialogDescription } from '@/components/ui/dialog';
 import { Progress } from '@/components/ui/progress';
 import { siteConfig,concerts,type Concert } from '@/lib/orchestra-data';
+import {assetPath} from '@/lib/assets';
 
 export function HeroVideo(){const [reduced,setReduced]=useState(true),[paused,setPaused]=useState(false);const video=useRef<HTMLVideoElement>(null);useEffect(()=>{const mq=matchMedia('(prefers-reduced-motion: reduce)');setReduced(mq.matches);const change=()=>setReduced(mq.matches);mq.addEventListener('change',change);return ()=>mq.removeEventListener('change',change)},[]);if(!siteConfig.heroVideoUrl||reduced)return null;return <><video ref={video} src={siteConfig.heroVideoUrl} muted autoPlay loop playsInline preload="metadata" aria-hidden="true"/><button className="absolute right-6 top-6 rounded border border-white/30 bg-black/40 px-3 py-2 text-sm" onClick={()=>{if(paused){video.current?.play().catch(()=>{})}else video.current?.pause();setPaused(!paused)}}>{paused?'Play background':'Pause background'}</button></>}
 
@@ -19,9 +20,9 @@ export function CalendarWidget(){const [event,setEvent]=useState<Concert|null>(n
 export function FundraisingTracker(){const [burst,setBurst]=useState(0),[open,setOpen]=useState(false);const {raised,goal,isDemo}=siteConfig.campaign;const percent=Math.min(100,Math.round(raised/goal*100));return <div id="support" className="fundraiser"><Heart size={25} strokeWidth={1.5}/><span className="eyebrow">HELP OUR NEXT CHAPTER</span><h2>A little support.<br/>A lasting impact.</h2><p>Help put new music on every stand.</p><div className="fund-label"><b>New Sheet Music Fund</b><span>{percent}%</span></div><Progress value={percent} aria-label="Sheet music fundraising progress" className="h-1.5 bg-white/10 [&_[data-slot=progress-indicator]]:bg-[#91bd9b]"/><p className="mt-3"><strong>${raised.toLocaleString()}</strong> <span className="muted">of ${goal.toLocaleString()} · {isDemo?'Sample campaign':'raised'}</span></p><button className="button primary" onClick={()=>{setBurst(v=>v+1);setOpen(true)}}>Donate with PayPal <Heart size={16}/></button>{burst>0&&<div className="burst" key={burst} aria-hidden="true">{Array.from({length:18},(_,i)=><i key={i} style={{'--a':`${i*20}deg`} as CSSProperties}/>)}</div>}<Dialog open={open} onOpenChange={setOpen}><DialogContent><DialogTitle className="dialog-title">Help the music continue.</DialogTitle><DialogDescription className="dialog-copy">Thank you for supporting McKay. Continue to the program’s existing PayPal donation page. The campaign total shown in this design is illustrative; clicking does not record a donation.</DialogDescription><a className="button primary" href={siteConfig.paypalUrl||siteConfig.officialUrl} target="_blank" rel="noreferrer">Continue to PayPal <ArrowUpRight size={17}/></a></DialogContent></Dialog></div>}
 
 const carouselImages=[
- {src:'/images/mckay-rehearsal.jpg',alt:'McKay orchestra rehearsal'},
- {src:'/images/mckay-concert-stage.jpg',alt:'McKay orchestra concert'},
- {src:'/images/mckay-orchestra-group.jpg',alt:'McKay orchestra students'},
+ {src:assetPath('/images/mckay-rehearsal.jpg'),alt:'McKay orchestra rehearsal'},
+ {src:assetPath('/images/mckay-concert-stage.jpg'),alt:'McKay orchestra concert'},
+ {src:assetPath('/images/mckay-orchestra-group.jpg'),alt:'McKay orchestra students'},
 ];
 export function ImageCarousel(){
  const [index,setIndex]=useState(0);
