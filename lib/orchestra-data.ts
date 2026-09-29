@@ -1,4 +1,4 @@
-export const ensembleNames = ['Advanced Symphony', 'Chamber Ensemble', 'Symphony Strings', 'String Ensemble', 'Concert Orchestra'];
+export const ensembleNames = ['Chamber Ensemble', 'Advanced Symphony', 'String Ensemble', 'Concert Orchestra'];
 export const slugify = (name: string) => name.toLowerCase().replaceAll(' ', '-');
 export type Section = { id:string; name:string; color:string; count:number; rows:number[] };
 const sections = [
