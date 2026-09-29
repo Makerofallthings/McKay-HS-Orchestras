@@ -84,12 +84,22 @@ function Chair({ seat, color, dimmed, onHover, onLeave }: {
 }
 
 function InstrumentIcon({sectionId}:{sectionId:string}) {
-  const tall=sectionId==='cello'||sectionId==='bass';
-  const doubleBass=sectionId==='bass';
-  return <svg className={'instrument-icon '+(tall?'instrument-icon-tall':'')} viewBox="0 0 24 24" aria-hidden="true">
-    <path d={tall?'M13 2v10.1c2.5.8 3.9 2.8 3.9 5.2 0 2.6-1.8 4.7-4.2 4.7s-4.2-2.1-4.2-4.7c0-2.4 1.4-4.4 3.9-5.2V2':'M13 2v6.6c2.2.7 3.5 2.5 3.5 4.6 0 2.3-1.6 4.2-3.9 4.2s-3.9-1.9-3.9-4.2c0-2.1 1.3-3.9 3.5-4.6V2'} />
-    <path d="M10.5 4.5h5M10 7h6M10 10h6" />
-    {doubleBass&&<path d="M6 20h13" />}
+  const type=sectionId.startsWith('violin')?'violin':sectionId;
+  if(type==='violin')return <svg className="instrument-icon instrument-icon-violin" viewBox="0 0 32 32" aria-hidden="true">
+    <path d="M16 2v7M12 3h8M12 6h8M16 9c-2.8 0-4.9 2-4.9 4.6 0 1.2.5 2.2 1.2 2.9-.7.7-1.2 1.7-1.2 2.9 0 2.6 2.1 4.7 4.9 4.7s4.9-2.1 4.9-4.7c0-1.2-.5-2.2-1.2-2.9.7-.7 1.2-1.7 1.2-2.9C20.9 11 18.8 9 16 9Z" />
+    <path d="M15 2v22M17 2v22M12.8 16h6.4M13.5 21.2h5" />
+  </svg>;
+  if(type==='viola')return <svg className="instrument-icon instrument-icon-viola" viewBox="0 0 32 32" aria-hidden="true">
+    <path d="M16 2v7M11.5 3h9M11.5 6h9M16 9c-3.3 0-5.7 2.1-5.7 4.9 0 1.2.5 2.3 1.3 3.1-.8.8-1.3 1.9-1.3 3.1 0 2.8 2.4 4.9 5.7 4.9s5.7-2.1 5.7-4.9c0-1.2-.5-2.3-1.3-3.1.8-.8 1.3-1.9 1.3-3.1C21.7 11.1 19.3 9 16 9Z" />
+    <path d="M15 2v23M17 2v23M12.4 16.5h7.2M13.1 22h5.8" />
+  </svg>;
+  if(type==='cello')return <svg className="instrument-icon instrument-icon-cello" viewBox="0 0 32 32" aria-hidden="true">
+    <path d="M16 1.5v8M12 3h8M12 6h8M16 9.5c-3.1 0-5.1 2.5-5.1 5.3 0 1.5.6 2.6 1.5 3.5-.9.9-1.5 2-1.5 3.6 0 2.8 2.1 5.2 5.1 5.2s5.1-2.4 5.1-5.2c0-1.6-.6-2.7-1.5-3.6.9-.9 1.5-2 1.5-3.5 0-2.8-2-5.3-5.1-5.3Z" />
+    <path d="M15 1.5v26M17 1.5v26M12.8 18.2h6.4M13.3 24h5.4M16 27.5v3" />
+  </svg>;
+  return <svg className="instrument-icon instrument-icon-bass" viewBox="0 0 32 32" aria-hidden="true">
+    <path d="M18 1.5v7.2M14 3h8M14 6h8M18 8.7c-3.5 0-5.8 2.8-5.8 5.8 0 1.6.6 2.9 1.6 3.8-1 1-1.6 2.2-1.6 3.9 0 3 2.3 5.5 5.8 5.5s5.8-2.5 5.8-5.5c0-1.7-.6-2.9-1.6-3.9 1-.9 1.6-2.2 1.6-3.8 0-3-2.3-5.8-5.8-5.8Z" />
+    <path d="M17 1.5v26M19 1.5v26M14 18.7h8M15 24.5h6M18 27.5v3M8 30h20" />
   </svg>;
 }
 
