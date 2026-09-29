@@ -49,7 +49,9 @@ export function createSeats(sections: Section[]): Seat[] {
           number,
           row,
           role: row === 0 && slot === 0 ? 'Principal' : row === 0 && slot === 1 ? 'Co-principal' : 'Section player',
-          position: section.id === 'bass' ? [4.6 - slot * 1.4, 0, -4.9] : polar(radius,angle),
+          // Keep the row exactly horizontal. The principal begins directly
+          // behind the middle chair of viola row two, then the row runs right.
+          position: section.id === 'bass' ? [2.65 + slot * 1.4, 0, -4.35] : polar(radius,angle),
           // Chair fronts point along local +Z. The outer string sections face
           // each other horizontally; only the inner sections fan inward.
           rotation: section.id === 'violin1' ? Math.PI / 2
