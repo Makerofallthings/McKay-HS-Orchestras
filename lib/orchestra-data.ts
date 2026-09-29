@@ -2,7 +2,7 @@ export const ensembleNames = ['Advanced Symphony', 'Chamber Ensemble', 'Symphony
 export const slugify = (name: string) => name.toLowerCase().replaceAll(' ', '-');
 export type Section = { id:string; name:string; color:string; count:number; rows:number[] };
 const sections = [
- {id:'violin1',name:'1st Violins',color:'#45c2ff',count:4,rows:[2,2]},
+ {id:'violin1',name:'1st Violins',color:'#45c2ff',count:6,rows:[2,2,2]},
  {id:'violin2',name:'2nd Violins',color:'#4e78ff',count:10,rows:[2,4,4]},
  {id:'viola',name:'Violas',color:'#be77ff',count:5,rows:[2,3]},
  {id:'cello',name:'Cellos',color:'#df9a4b',count:6,rows:[2,2,2]},
