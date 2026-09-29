@@ -174,7 +174,7 @@ export default function Orchestra3DSeating({sections,ensembleId='default'}:{sect
           <boxGeometry args={[1.65,.12,1.2]}/><meshStandardMaterial color="#a38960"/>
         </mesh>
         <StageLabel text="CONDUCTOR" color="#d1c4a5" position={[0,.15,conductorZ+1.2]}/>
-        {focus&&<StageLabel text={focus.name} color={focus.color} position={focus.id==='bass'?[4.75,1.6,-4]:sectionLayout[focus.id].label}/>}
+        {focus&&<StageLabel text={focus.name} color={focus.color} position={focus.id==='bass'?[4.75,1.6,-3.1]:sectionLayout[focus.id].label}/>}
         {seats.map(seat=><Chair key={seat.id} seat={seat} color={sections.find(s=>s.id===seat.sectionId)!.color}
           dimmed={!!active&&active!==seat.sectionId} onHover={enterSeat} onLeave={leaveSeat}/>)}
         <OrbitControls makeDefault target={[0,1,-1.3]} enablePan={false} enableDamping={false}
