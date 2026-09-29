@@ -1,16 +1,16 @@
 export const ensembleNames = ['Advanced Symphony', 'Chamber Ensemble', 'Symphony Strings', 'String Ensemble', 'Concert Orchestra'];
 export const slugify = (name: string) => name.toLowerCase().replaceAll(' ', '-');
-export type Section = { id:string; name:string; color:string; count:number };
+export type Section = { id:string; name:string; color:string; count:number; rows:number[] };
 const sections = [
- {id:'violin1',name:'1st Violins',color:'#64a9e4'},
- {id:'violin2',name:'2nd Violins',color:'#327dbc'},
- {id:'viola',name:'Violas',color:'#af81cc'},
- {id:'cello',name:'Cellos',color:'#c68c55'},
- {id:'bass',name:'Basses',color:'#a74451'},
+ {id:'violin1',name:'1st Violins',color:'#45c2ff',count:8,rows:[2,2,2,2]},
+ {id:'violin2',name:'2nd Violins',color:'#4e78ff',count:10,rows:[2,4,4]},
+ {id:'viola',name:'Violas',color:'#be77ff',count:5,rows:[2,3]},
+ {id:'cello',name:'Cellos',color:'#df9a4b',count:6,rows:[2,2,2]},
+ {id:'bass',name:'Basses',color:'#983c5d',count:4,rows:[4]},
 ];
-// Illustrative section sizes. Replace with the director's approved roster totals.
-const counts = [[12,10,8,6,4],[8,6,4,4,2],[10,8,6,6,3],[9,8,5,5,2],[10,9,6,6,3]];
-export const ensembles = ensembleNames.map((name,index)=>({ name,slug:slugify(name),sections:sections.map((s,i)=>({...s,count:counts[index][i]})) }));
+// User-requested demonstration seating, shared across the five ensemble pages.
+// Basses sit four across behind the violas.
+export const ensembles = ensembleNames.map(name=>({name,slug:slugify(name),sections:sections.map(s=>({...s,rows:[...s.rows]}))}));
 export type Concert = {id:string;title:string;start:string;end:string;location:string};
 export const concerts:Concert[]=[
  {id:'bach',title:'Bach & Mendelssohn (sample event)',start:'2026-10-16T02:00:00Z',end:'2026-10-16T03:30:00Z',location:'McKay High School Auditorium, Salem, Oregon'},

@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import "./redesign.css";
 import { AudioPlayer } from "@/components/orchestra/Features";
+import RouteScroll from "@/components/orchestra/RouteScroll";
 
 export const metadata: Metadata = {
   title: "McKay High School Orchestras | Many musicians. One sound.",
@@ -20,8 +22,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className="antialiased">{children}<AudioPlayer/></body>
+    <html lang="en" data-scroll-behavior="smooth">
+      <head><meta name="darkreader-lock" content=""/><meta name="color-scheme" content="dark"/></head>
+      <body className="antialiased"><RouteScroll/>{children}<AudioPlayer/></body>
     </html>
   );
 }

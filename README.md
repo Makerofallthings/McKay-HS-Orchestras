@@ -38,10 +38,15 @@ components/orchestra/
   HomePage.tsx                    Header, welcome, concert promotion, ensemble cards, footer
   Features.tsx                    Video, audio, live calendar, ICS actions, fundraising, social
   EnsemblePage.tsx                Ensemble page and lazy-loaded WebGL boundary
-  Orchestra3DSeating.tsx          Data-to-chair layout, scene, hover isolation, accessible legend
+  Orchestra3DSeating.tsx          Scene, stable chair hitboxes, hover isolation, accessible legend
+  SchoolResources.tsx            Native handbook, elementary, and contact experiences
+  SchoolClassInformation.tsx     Ten school-specific class details and local PDF viewers
   ResourcePage.tsx                Original-content links and seven calendar subscriptions
 components/ui/                   Existing accessible UI primitives
 lib/orchestra-data.ts            Ensemble data, sample concerts, media and integration settings
+lib/seating.ts                   Paired-desk geometry and principal/co-principal assignment
+lib/handbook.ts                  Archived handbook content and historical concert dates
+lib/elementary-classes.ts        Teacher, schedule, location, and transport records
 public/
   favicon.svg                    Site-specific favicon
 .openai/hosting.json             Sites identity and static output configuration
@@ -50,11 +55,11 @@ next.config.ts                   Static export and project root
 
 ## 3D component logic
 
-`Section` supplies `id`, `name`, `color`, and `count`. `createSeats()` produces one `Seat` per musician with a stable ID, section ID, 3D position, and rotation. Three chairs per curved row stay separated; the chairs face the conductor's podium. These are illustrative layouts, not official student rosters. For exact seating, replace generated positions with director-maintained seat records while retaining the same `Seat` interface.
+`Section` supplies `id`, `name`, `color`, `count`, and `rows`. `createSeats()` produces one `Seat` per musician with a stable ID, section ID, position, rotation, desk row, and role. The requested layout is shared across all five previews: first violins 2–2–2–2; second violins 2–4–4; violas 2–3; cellos 2–2–2; basses 4 across. String sections follow concentric semicircular rows with equal arc spacing. First violins and cellos face each other horizontally; four basses sit in a straight row behind the violas. The hall has a wood floor, curtains, acoustic panels and warm lighting. Orbit controls reach eye level. Select a chair or use the accessible seat dropdown to assign a name and grade (9–12). Assignments persist locally per ensemble in browser storage; they are not a shared or published roster. These are demonstration layouts, not official student rosters.
 
-Each `Chair` group owns a seat, back, and four legs. Pointer events stop propagation to avoid selecting chairs behind the nearest hit. Hover sets a temporary section; clicking/tapping pins a selection. All chairs outside the active section change to a dark neutral material. The HTML overlay reads the same section data to show the section's name and member count. Focusable buttons provide equivalent selection without a mouse. Reset clears selection and restores the camera.
+Each `Chair` group owns a seat, back, and four legs. A single transparent hitbox handles pointer events, preventing flicker between chair parts. Hover temporarily isolates a section; clicking/tapping pins it. Other sections dim. The outside chair at each front desk is the principal and always remains red; its neighboring co-principal has a cream backrest stripe. The tooltip reports instrument, total members, seat number, and role. Focusable buttons provide equivalent section selection without a mouse. Reset clears selection and restores the camera.
 
-The canvas uses `frameloop="demand"`, capped pixel density, a simple stage mesh, and one shadow-casting light. It redraws on interaction instead of running continuously. An error boundary and Canvas fallback preserve usable section counts if WebGL fails. For hundreds or thousands of musicians, use instanced chair geometry and update per-instance colors; the current 24–40-player examples favor readable foundational code.
+The canvas uses `frameloop="demand"`, capped pixel density, a responsive orthographic camera, simple lighting without shadow-map artifacts, and a low-complexity stage. It redraws on interaction instead of running continuously. An error boundary and Canvas fallback preserve usable section counts if WebGL fails. For hundreds or thousands of musicians, use instanced chair geometry; the current 33-player demonstrations favor readable foundational code.
 
 ## Live connections and remaining assets
 
@@ -64,7 +69,7 @@ Already connected from the official program homepage:
 - Givebutter silent auction; its link contains May 1 and may represent a previous campaign.
 - PayPal hosted donation button.
 - Seven published Google Calendar sources, their Google/Apple subscription links, and the official X account.
-- Current handbook, elementary program, and contact pages remain accessible at their original official destinations. Their content has not been copied or invented.
+- The handbook, elementary information, and contact pages are fully native to this site. The archived 2021–2022 handbook has readable sections, historical dates, and the original nine-page PDF stored locally. All ten elementary schools have on-site teacher, schedule, location, and transportation details, plus local original PDFs. Instrument demonstration videos are embedded on-site. The contact page provides the director's email, main office telephone, address, and directions.
 
 Configure these fields in `lib/orchestra-data.ts` when approved assets are available:
 
@@ -81,7 +86,7 @@ tracks: [
 
 The source intentionally leaves these fields empty: no approved school video or audio was supplied. The homepage displays an authentic performance photo; the audio player clearly says recordings are coming soon. Do not label unrelated stock music as a McKay performance. Optimize video to a short muted 1080p loop and serve a compressed poster image; provide public HTTPS media or files in `public/media/`.
 
-The $1,200 / $5,000 campaign and all ensemble counts are samples. The optional sample-concert calendar actions are explicitly labeled. The live embedded calendar is the default. A donation click triggers a visual celebration and opens an explanatory dialog; it does not increase the fundraising total or claim that payment succeeded. To make totals live, implement server-side verified, idempotent PayPal webhook processing, refunds, and a read-only campaign summary endpoint. The linked hosted button cannot confirm payments to this static frontend.
+The $1,200 / $5,000 campaign is a sample; ensemble counts reflect the user's requested demonstration layout. The optional sample-concert calendar actions are explicitly labeled. The live embedded calendar is the default. A donation click triggers a visual celebration and opens an explanatory dialog; it does not increase the fundraising total or claim that payment succeeded. To make totals live, implement server-side verified, idempotent PayPal webhook processing, refunds, and a read-only campaign summary endpoint. The linked hosted button cannot confirm payments to this static frontend.
 
 Background video, audio playback, live social embed, and public calendar subscriptions depend on approved media or third-party availability. The implementation contains their integration code, but empty media fields do not imply that these assets were migrated.
 
@@ -95,7 +100,14 @@ Visible focus rings, semantic headings, accessible dialogs, named controls, sect
 - Performance photo source: https://www.stephanieannboyd.com/alex-figueroa-mckay-high-school-orchestras-50-state-string-orchestra-project
 - React Three Fiber canvas: https://r3f.docs.pmnd.rs/api/canvas
 - React Three Fiber pointer events: https://r3f.docs.pmnd.rs/api/events
+- Original handbook: https://www.mckayorchestras.com/orchestra-handbook
+- Elementary source sheets: https://www.mckayorchestras.com/elementary-orchestra-info
+- Contact details: https://www.mckayorchestras.com/contact-us
+
+The original handbook is explicitly dated 2021–2022. Elementary class sheets omit a year and include some inconsistent weekday/date wording. The native pages retain those facts with visible archival/verification notes and direct teacher contacts. They do not invent current-year policies or schedules.
 
 The performance image is an authentic McKay photo on the source page above; no reuse license was stated there. Obtain school/photographer approval or replace it with a school-supplied asset before a public launch. The private concept does not represent a completed content/rights review.
 
 All six requested affiliation logos and the original violin-outline McKay header logo were migrated from the original public site into `public/branding/`. They are displayed with their original colors and accessible names.
+
+Stage repair: labels now use native WebGL sprites, eliminating nested DOM roots and removeChild/unmount errors. Camera reset repositions the existing scene. Three.js and its types are pinned to 0.180.0, compatible with the renderer’s Clock API. Hover uses ownership checks and a settling delay; clicked selection takes precedence.

@@ -1,0 +1,62 @@
+{
+  "AUBURN": {
+    "src": "/branding/schools/auburn.svg",
+    "alt": "Auburn Astro",
+    "source": "https://auburn.salkeiz.k12.or.us/about",
+    "assetUrl": "https://resources.finalsite.net/images/v1681749540/salkeizk12orus/otuu9hlrhfb37k0es683/Auburn_mascot_R_sq.svg"
+  },
+  "CHAVEZ": {
+    "src": "/branding/schools/chavez.svg",
+    "alt": "Chavez Charger",
+    "source": "https://chavez.salkeiz.k12.or.us/about",
+    "assetUrl": "https://resources.finalsite.net/images/v1681751286/salkeizk12orus/lfh03mlmchwyn9mkog4z/Chavez_mascot_R_sq.svg"
+  },
+  "HALLMAN": {
+    "src": "/branding/schools/hallman.svg",
+    "alt": "Hallman Husky",
+    "source": "https://hallman.salkeiz.k12.or.us/about",
+    "assetUrl": "https://resources.finalsite.net/images/v1681859741/salkeizk12orus/i0wexcjfpundfpci5976/Hallman_mascot_R_sq.svg"
+  },
+  "HAMMOND": {
+    "src": "/branding/schools/hammond.svg",
+    "alt": "Hammond Bobcat",
+    "source": "https://hammond.salkeiz.k12.or.us/about",
+    "assetUrl": "https://resources.finalsite.net/images/v1782839547/salkeizk12orus/fojc3xm9vk2uypdc1sbh/Hammond_mascot_R_sq.svg"
+  },
+  "HAYESVILLE": {
+    "src": "/branding/schools/hayesville.svg",
+    "alt": "Hayesville Tiger",
+    "source": "https://hayesville.salkeiz.k12.or.us/about",
+    "assetUrl": "https://resources.finalsite.net/images/v1681913066/salkeizk12orus/ihneonkjek5dkytw4wlq/Hayesville_mascot_sq.svg"
+  },
+  "LAMB": {
+    "src": "/branding/schools/lamb.svg",
+    "alt": "Lamb Mascot",
+    "source": "https://lamb.salkeiz.k12.or.us/about",
+    "assetUrl": "https://resources.finalsite.net/images/v1778686286/salkeizk12orus/oxjr1pglec7xia3rw5pa/Lamb_mascot_R_sq.svg"
+  },
+  "SCOTT": {
+    "src": "/branding/schools/scott.svg",
+    "alt": "Scott Eagle",
+    "source": "https://scott.salkeiz.k12.or.us/about",
+    "assetUrl": "https://resources.finalsite.net/images/v1681755103/salkeizk12orus/trvogbh52plp9axctrly/Scott_mascott_R_sq.svg"
+  },
+  "SWEGLE": {
+    "src": "/branding/schools/swegle.svg",
+    "alt": "Swegle Einstein the Eagle",
+    "source": "https://swegle.salkeiz.k12.or.us/about",
+    "assetUrl": "https://resources.finalsite.net/images/v1681755586/salkeizk12orus/thqnkivfdalu3nk8kw52/Swegle_mascot_R_sq.svg"
+  },
+  "WASHINGTON": {
+    "src": "/branding/schools/washington.svg",
+    "alt": "Washington Wildcat",
+    "source": "https://washington.salkeiz.k12.or.us/about",
+    "assetUrl": "https://resources.finalsite.net/images/v1681755733/salkeizk12orus/oafzitpkanthdjbbzp7i/Washington_mascot_R_sq.svg"
+  },
+  "YOSHIKAI": {
+    "src": "/branding/schools/yoshikai.svg",
+    "alt": "Yoshikai Dolphin",
+    "source": "https://yoshikai.salkeiz.k12.or.us/about",
+    "assetUrl": "https://resources.finalsite.net/images/v1681756202/salkeizk12orus/hiukhujtysecjzsexnob/Yoshikai_mascot_R_sq.svg"
+  }
+}

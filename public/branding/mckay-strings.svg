@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 144 128" fill="none">
+ <title>McKay Royal Strings — violin, viola, cello and bass</title>
+ <path d="m44 14 10 6 18-13 18 13 10-6-5 18H49Z" stroke="#d8b779" stroke-width="2.4" stroke-linejoin="round"/>
+ <path d="M18 111 126 39M18 39l108 72" stroke="#91b8a4" stroke-width="1.4" opacity=".35"/>
+ <defs><g id="string" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round">
+ <path d="M0-35v24m-3-23h6M-4-26h8M-4-19h8M-3-10c-11-1-13 10-6 14-7 4-12 13-7 20 5 9 27 9 32 0 5-7 0-16-7-20 7-4 5-15-6-14Z"/>
+ <path d="M0-10v34m-6-6H6m-14-8 2-4m14 4-2-4M0 31v7" stroke-width="1.4"/>
+ </g></defs>
+ <use href="#string" transform="translate(22 82) scale(.63)" style="color:#a9cbdc"/>
+ <use href="#string" transform="translate(52 80) scale(.76)" style="color:#c4b3d9"/>
+ <use href="#string" transform="translate(86 78) scale(.94)" style="color:#e0b685"/>
+ <use href="#string" transform="translate(122 75) scale(1.05)" style="color:#d8b779"/>
+ <path d="M29 122h86" stroke="#d8b779" stroke-width="1.5"/>
+</svg>

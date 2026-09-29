@@ -1,0 +1,67 @@
+{
+  "source": "https://www.mckayorchestras.com/elementary-orchestra-info",
+  "schools": [
+    {
+      "label": "AUBURN",
+      "url": "https://drive.google.com/file/d/1-Fp1s2OGM4dP3jlVVw4Sm4Oiy1DmX56x/view?usp=sharing"
+    },
+    {
+      "label": "CHAVEZ",
+      "url": "https://drive.google.com/file/d/16jUI8CmZu3eNLV740nF2ivX4dyR2oeC6/view?usp=sharing"
+    },
+    {
+      "label": "HALLMAN",
+      "url": "https://drive.google.com/file/d/1me33dg7DH9sJLlq4C9c3M_syN0hTgiFB/view?usp=sharing"
+    },
+    {
+      "label": "HAMMOND",
+      "url": "https://drive.google.com/file/d/12A_faC-esjNdXnlIoHAIfU7Q7FbqYn0T/view?usp=sharing"
+    },
+    {
+      "label": "HAYESVILLE",
+      "url": "https://drive.google.com/file/d/1G103ztfldtPNbR5zQVnktY0sOr4oJSUB/view?usp=sharing"
+    },
+    {
+      "label": "LAMB",
+      "url": "https://drive.google.com/file/d/1P63iyeeMO2oVAKXVAB3qGyeDGkm-eKpT/view?usp=sharing"
+    },
+    {
+      "label": "SCOTT",
+      "url": "https://drive.google.com/file/d/1KWq4ahPJFC5BVKivin-OTfuibKYyz2TV/view?usp=sharing"
+    },
+    {
+      "label": "SWEGLE",
+      "url": "https://drive.google.com/file/d/11DNOs6OFgbMKYsHKw-GsLAGNBOBKnA4m/view?usp=sharing"
+    },
+    {
+      "label": "WASHINGTON",
+      "url": "https://drive.google.com/file/d/1n-Sp0B94R8uoKD6UgI74vdvdGH0_VXmK/view?usp=sharing"
+    },
+    {
+      "label": "YOSHIKAI",
+      "url": "https://drive.google.com/file/d/1O0uTeaI4mPUmzpcfgjDsaexLzn53aCbs/view?usp=sharing"
+    }
+  ],
+  "videos": [
+    {
+      "label": "VIOLIN",
+      "url": "https://youtu.be/F-RTaEG0atM"
+    },
+    {
+      "label": "VIOLA",
+      "url": "https://youtu.be/HizaD5eTUmA"
+    },
+    {
+      "label": "CELLO",
+      "url": "https://youtu.be/osrmnMZiHHs"
+    },
+    {
+      "label": "BASS",
+      "url": "https://youtu.be/1m5T-UlttVg"
+    },
+    {
+      "label": "ENSEMBLE",
+      "url": "https://youtu.be/COShWUG0hBo"
+    }
+  ]
+}
