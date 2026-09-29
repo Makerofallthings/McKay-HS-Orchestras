@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import "./redesign.css";
+import "./mobile.css";
 import { AudioPlayer } from "@/components/orchestra/Features";
 import RouteScroll from "@/components/orchestra/RouteScroll";
 

@@ -6,12 +6,14 @@ import {Accordion,AccordionItem,AccordionTrigger,AccordionContent} from '@/compo
 
 export default function HandbookReader(){
  const [page,setPage]=useState(0);
+ const [contentsOpen,setContentsOpen]=useState(false);
  const heading=useRef<HTMLHeadingElement>(null);
  const titles=[...handbookSections.map(s=>s.title),'2021–2022 concert dates','Original handbook PDF'];
  const chapter=handbookSections[page];
- const go=(next:number)=>{setPage(next);requestAnimationFrame(()=>{heading.current?.focus({preventScroll:true});heading.current?.scrollIntoView({behavior:'instant',block:'start'});});};
+ const go=(next:number)=>{setPage(next);setContentsOpen(false);requestAnimationFrame(()=>{heading.current?.focus({preventScroll:true});heading.current?.scrollIntoView({behavior:'instant',block:'start'});});};
  return <div className="handbook-layout">
-  <nav className="handbook-index" aria-label="Handbook chapters"><span className="eyebrow">IN THIS GUIDE</span>{titles.map((title,index)=><button key={title} aria-current={page===index?'page':undefined} onClick={()=>go(index)}><span>{String(index+1).padStart(2,'0')}</span>{title}</button>)}</nav>
+  <button className="mobile-guide-toggle" aria-expanded={contentsOpen} aria-controls="handbook-contents" onClick={()=>setContentsOpen(value=>!value)}>Browse handbook chapters <span aria-hidden="true">{contentsOpen?'−':'+'}</span></button>
+  <nav id="handbook-contents" className={'handbook-index'+(contentsOpen?' is-open':'')} aria-label="Handbook chapters"><span className="eyebrow">IN THIS GUIDE</span>{titles.map((title,index)=><button key={title} aria-current={page===index?'page':undefined} onClick={()=>go(index)}><span>{String(index+1).padStart(2,'0')}</span>{title}</button>)}</nav>
   <div className="handbook-reader">
    <span className="chapter-number">PAGE {page+1} OF {titles.length}</span><h2 ref={heading} tabIndex={-1}>{titles[page]}</h2>
    <div className="handbook-chapters">
