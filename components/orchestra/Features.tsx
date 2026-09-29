@@ -23,6 +23,17 @@ const carouselImages=[
  {src:'/images/mckay-concert-stage.jpg',alt:'McKay orchestra concert'},
  {src:'/images/mckay-orchestra-group.jpg',alt:'McKay orchestra students'},
 ];
-export function ImageCarousel(){const [index,setIndex]=useState(0);const image=carouselImages[index];return <div className="image-carousel" aria-label="McKay orchestra gallery"><div className="carousel-frame"><img src={image.src} alt={image.alt}/><div className="carousel-caption"><span>McKAY ORCHESTRAS</span><strong>{image.alt}</strong></div><button className="carousel-arrow prev" aria-label="Previous photo" onClick={()=>setIndex(i=>(i-1+carouselImages.length)%carouselImages.length)}>←</button><button className="carousel-arrow next" aria-label="Next photo" onClick={()=>setIndex(i=>(i+1)%carouselImages.length)}>→</button></div><div className="carousel-dots">{carouselImages.map((item,i)=><button key={item.src} aria-label={`Show photo ${i+1}`} aria-current={i===index} onClick={()=>setIndex(i)}><span/></button>)}</div></div>}
+export function ImageCarousel(){
+ const [index,setIndex]=useState(0);
+ const image=carouselImages[index];
+ const captions=['Where the music takes shape.','Made for moments like this.','More than an orchestra.'];
+ return <div className="image-carousel" role="region" aria-roledescription="carousel" aria-label="McKay orchestra gallery">
+  <div className="carousel-frame"><img src={image.src} alt={image.alt}/><span className="gallery-overline">LIFE AT McKAY</span></div>
+  <div className="gallery-toolbar">
+   <div className="gallery-description" aria-live="polite"><span>{String(index+1).padStart(2,'0')} / {String(carouselImages.length).padStart(2,'0')}</span><strong>{captions[index]}</strong></div>
+   <div className="gallery-controls"><button aria-label="Previous photo" onClick={()=>setIndex(i=>(i-1+carouselImages.length)%carouselImages.length)}>←</button><button aria-label="Next photo" onClick={()=>setIndex(i=>(i+1)%carouselImages.length)}>→</button></div>
+  </div>
+ </div>;
+}
 
-export function Widgets(){return <section className="section-wrap support-gallery" id="support"><FundraisingTracker/><ImageCarousel/></section>}
+export function Widgets(){return <section className="support-gallery" aria-label="Support the music and explore our community"><div className="section-wrap support-gallery-inner"><FundraisingTracker/><ImageCarousel/></div></section>}
