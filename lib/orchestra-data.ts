@@ -9,7 +9,7 @@ const sections = [
  {id:'bass',name:'Basses',color:'#983c5d',count:4,rows:[4]},
 ];
 // User-requested demonstration seating, shared across the five ensemble pages.
-// Basses form a diagonal line beginning beside the middle viola in row two.
+// Basses sit four across behind the violas, with their chairs turned diagonally.
 export const ensembles = ensembleNames.map(name=>({name,slug:slugify(name),sections:sections.map(s=>({...s,rows:[...s.rows]}))}));
 export type Concert = {id:string;title:string;start:string;end:string;location:string};
 export const concerts:Concert[]=[

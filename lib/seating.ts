@@ -22,8 +22,8 @@ export const sectionLayout: Record<string,{angle:number;radius:number;label:[num
 
 /** Sections fan around the conductor on concentric semicircular rows.
  * Cellos mirror first violins and face them directly across the stage.
- * Basses form a straight diagonal line from the middle of the second viola row
- * toward the rear stage-right corner.
+ * Basses form a straight horizontal row behind the violas. Their chairs turn
+ * diagonally toward the conductor, following the requested sight line.
  * The outside player of the front desk is the principal; their partner is
  * the co-principal. Second violins have four chairs in each rear row.
  */
@@ -49,7 +49,7 @@ export function createSeats(sections: Section[]): Seat[] {
           number,
           row,
           role: row === 0 && slot === 0 ? 'Principal' : row === 0 && slot === 1 ? 'Co-principal' : 'Section player',
-          position: section.id === 'bass' ? [3.2 + slot * 1.18, 0, -2.7 - slot * .78] : polar(radius,angle),
+          position: section.id === 'bass' ? [4.6 - slot * 1.4, 0, -4.9] : polar(radius,angle),
           // Chair fronts point along local +Z. The outer string sections face
           // each other horizontally; only the inner sections fan inward.
           rotation: section.id === 'violin1' ? Math.PI / 2
