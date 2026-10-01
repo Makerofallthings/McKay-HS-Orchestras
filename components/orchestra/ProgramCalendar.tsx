@@ -1,0 +1,12 @@
+'use client';
+import {useState} from 'react';
+import {CalendarDays,ArrowUpRight} from 'lucide-react';
+import {siteConfig} from '@/lib/orchestra-data';
+
+export default function ProgramCalendar(){
+ const [view,setView]=useState<'AGENDA'|'MONTH'>('AGENDA');
+ const id=siteConfig.programCalendarId;
+ const feed=`https://calendar.google.com/calendar/ical/${encodeURIComponent(id)}/public/basic.ics`;
+ const embed='https://calendar.google.com/calendar/embed?'+new URLSearchParams({src:id,ctz:'America/Los_Angeles',mode:view,showTitle:'0',showPrint:'0',showCalendars:'0',showTz:'0',bgcolor:'#ffffff',color:'#b88642'});
+ return <div className="program-calendar-page"><div className="program-calendar-heading"><span className="eyebrow">THE McKAY PROGRAM CALENDAR</span><h1>Make time for <em>the music.</em></h1><p>Concerts, rehearsals, festivals, and trips. One calendar for our entire orchestra community.</p></div><section className="program-calendar-panel" aria-label="Program schedule"><div className="program-calendar-toolbar"><div><CalendarDays size={23}/><div><h2>What’s coming up</h2><span>Salem, Oregon · Pacific time</span></div></div><div className="program-calendar-tabs" aria-label="Calendar view"><button aria-pressed={view==='AGENDA'} onClick={()=>setView('AGENDA')}>Schedule</button><button aria-pressed={view==='MONTH'} onClick={()=>setView('MONTH')}>Month</button></div></div><iframe key={view} src={embed} title="McKay Orchestras program calendar" className="program-calendar-embed"/><div className="program-calendar-fallback"><span>Having trouble viewing the schedule?</span><a href={embed} target="_blank" rel="noreferrer">Open calendar <ArrowUpRight size={15}/></a></div></section><section className="program-calendar-subscribe"><div><span className="eyebrow">KEEP THE MUSIC IN YOUR PLANS</span><h2>One subscription.<br/><em>Every update.</em></h2><p>Add the program calendar to your own calendar to follow schedule changes. Your calendar app controls how often updates appear.</p></div><div className="program-calendar-subscribe-actions"><a className="button primary" href={'https://calendar.google.com/calendar/u/0/r?cid='+encodeURIComponent(id)} target="_blank" rel="noreferrer">Add to Google Calendar <ArrowUpRight size={16}/></a><a className="button" href={feed.replace('https://','webcal://')}>Subscribe in Apple / Outlook <ArrowUpRight size={16}/></a><a className="under-link" href={feed}>Download calendar (.ics)</a></div></section></div>;
+}

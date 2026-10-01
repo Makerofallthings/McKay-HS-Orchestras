@@ -18,11 +18,12 @@ export const concerts:Concert[]=[
  {id:'spring',title:'Spring strings showcase (sample event)',start:'2027-03-19T02:00:00Z',end:'2027-03-19T03:30:00Z',location:'McKay High School Auditorium, Salem, Oregon'},
 ];
 export const siteConfig = {
+ programCalendarId:'mckayhsorchestra@gmail.com',
  officialUrl:'https://www.mckayorchestras.com/',
  // Approved public media and verified official links belong here, never secrets.
  heroVideoUrl:'',
  tracks:[] as {title:string;subtitle:string;url:string}[],
  paypalUrl:'https://www.paypal.com/donate/?hosted_button_id=F4KB33NLGKSEE', ticketUrl:'https://www.eventbrite.com/e/bach-mendelssohn-tradition-and-transformation-tickets-1979884052498', auctionUrl:'https://givebutter.com/c/mckay-music-program-silent-auction-May1st', handbookUrl:'https://www.mckayorchestras.com/orchestra-handbook',
- calendarEmbedUrl:"https://www.google.com/calendar/embed?color=%23145e39&color=%234986e7&color=%23959ca7&color=%23ac725e&color=%23cd74e6&color=%23eac95e&color=%23f83a22&src=4ks24hq1pf0l4r0c47eraantvs@group.calendar.google.com&src=8ru7jb2q0p5j759qmhak4772oo@group.calendar.google.com&src=ad72ih83dgq54dk8e87tltvp4s@group.calendar.google.com&src=c9ldttnkheqn2r6hfbv6n2k1kc@group.calendar.google.com&src=hcvg4jioi03sk46pcsen90eje0@group.calendar.google.com&src=k6gbin7dag6dpgkmsc6udvcle8@group.calendar.google.com&src=mckayhsorchestra@gmail.com&mode=AGENDA&ctz=America%2FLos_Angeles", calendarSubscriptionUrl:'https://www.mckayorchestras.com/calendar', twitterProfileUrl:'https://twitter.com/McKayOrchestras',
+ calendarEmbedUrl:"https://calendar.google.com/calendar/embed?src=mckayhsorchestra%40gmail.com&mode=AGENDA&ctz=America%2FLos_Angeles", calendarSubscriptionUrl:'https://www.mckayorchestras.com/calendar', twitterProfileUrl:'https://twitter.com/McKayOrchestras',
  campaign:{raised:1200,goal:5000,isDemo:true},
 };
