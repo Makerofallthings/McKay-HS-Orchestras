@@ -1,0 +1,30 @@
+rules_version = '2';
+service cloud.firestore {
+ match /databases/{database}/documents {
+  function admin() {
+   return request.auth != null && request.auth.token.email_verified == true
+    && exists(/databases/$(database)/documents/admins/$(request.auth.uid));
+  }
+  function validEvent() {
+   let e = request.resource.data;
+   return e.keys().hasAll(['title','category','startsAt','endsAt','location','published','updatedAt'])
+    && e.keys().hasOnly(['title','category','startsAt','endsAt','location','published','updatedAt'])
+    && e.title is string && e.title.size() > 0 && e.title.size() <= 200
+    && e.category in ['Concert','Festival','Trip','Rehearsal']
+    && e.startsAt is string && e.startsAt.size() <= 40
+    && e.endsAt is string && e.endsAt.size() <= 40 && e.endsAt > e.startsAt
+    && e.location is string && e.location.size() <= 300
+    && e.published is bool && e.updatedAt == request.time;
+  }
+  match /events/{eventId} {
+   allow read: if admin() || resource.data.published == true;
+   allow create, update: if admin() && validEvent();
+   allow delete: if admin();
+  }
+  match /admins/{uid} {
+   allow get: if request.auth != null && request.auth.uid == uid;
+   allow list, write: if false;
+  }
+  match /{document=**} {allow read, write: if false;}
+ }
+}
