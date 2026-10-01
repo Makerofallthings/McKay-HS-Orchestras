@@ -31,14 +31,16 @@ The repository contains the rule configuration but does not publish rules automa
 
 ## Website content administration
 
-The footer lock opens `/admin/`. Once signed in as an approved admin, an Admin navigation link appears. This panel edits public text, student count, and the visibility of the four existing ensembles. The ensemble total and tagged prose follow the selected groups automatically. Calendar editing is linked from this panel.
+The footer lock beside the copyright opens an administrator sign-in modal without navigating away. Typing `2026` outside text fields opens the same modal. This shortcut only opens sign-in; Firebase approved-admin membership is still required. The old `/admin/` dashboard URL now returns to the homepage and opens sign-in. Calendar scheduling remains at `/admin/calendar/`.
 
-Publish the updated `firestore.rules` file again to enable the `site/content` document. The calendar-only rules do not authorize website-content writes. The panel keeps changes in a local draft until Publish is clicked. Publication uses a transaction with version checks so simultaneous admins cannot silently overwrite one another.
+Approved admins see one Edit control per logical block, including paragraphs, cards, the audio player, and individual statistics. Related text and link fields save together in a transaction. The student total and four existing ensembles' visibility update the totals automatically. Concurrent changes to the same edited field cause a conflict instead of overwriting another admin's work.
 
-Text is rendered as plain text, never HTML. Original uploaded PDFs are separate documents and are not changed by editing the website's handbook or class-sheet text. Image URLs and public link destinations can be changed from the panel. Adding entirely new ensemble routes, replacing uploaded PDFs, uploading files to Firebase Storage, and changing 3D chair layouts still require additional implementation. Email/text reminders remain a separate unfinished integration.
+Publish the updated `firestore.rules` file to enable the `site/content` document. The calendar-only rules do not authorize website-content writes. Text is rendered as plain text, never HTML. Original uploaded PDFs are separate documents. Image URLs and public link destinations are editable; new ensemble routes, PDF replacement, file uploads, and 3D chair layouts still require code changes.
 
+## Reminders: not activated yet
 Reminder settings currently save a preview on the visitor's device. They do not register a subscription or send messages.
 
 The production system still needs verified contact enrollment, consent, private subscription records, an unsubscribe/manage link, scheduled Cloud Functions, delivery jobs with duplicate protection, and email/SMS provider credentials held in server secrets. Event changes and cancellations must reschedule or cancel pending jobs. Repeat reminders stop at the event start. Time calculations must respect the subscriber's time zone and daylight saving changes. Never expose subscriptions or allow public writes to an email delivery queue.
 
 Choose an email/SMS provider before implementing delivery. Admin edits and published calendar reads do not require a messaging provider.
+

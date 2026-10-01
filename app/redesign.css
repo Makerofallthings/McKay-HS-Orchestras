@@ -124,3 +124,9 @@ html{scrollbar-width:none}html::-webkit-scrollbar{width:0;height:0}body::-webkit
 .inline-editor-dialog label{display:block;font:14px/1.5 Arial,sans-serif;color:#c8d2df}.inline-editor-dialog textarea,.inline-editor-dialog input:not([type=checkbox]){display:block;width:100%;margin-top:8px;padding:12px;border:1px solid #53637b;border-radius:8px;background:#101720;color:#fff;font:16px/1.5 Arial,sans-serif}.inline-editor-dialog textarea{resize:vertical}.inline-editor-dialog p{font:14px/1.6 Arial,sans-serif;color:#e8bb78;margin-top:14px}.inline-editor-actions{display:flex;justify-content:flex-end;gap:12px;margin-top:24px}.inline-editor-dialog fieldset{border:0;padding:0}.inline-editor-dialog fieldset label{padding:10px 0}.inline-editor-dialog input[type=checkbox]{margin-right:12px;accent-color:#e8bb78}.hero-image-edit{position:absolute;right:24px;top:24px;z-index:8}
 .inline-edit-pencil[data-edit-secondary]{display:none!important}
 .inline-editor-fields{display:grid;gap:18px}.inline-editor-dialog:has(.inline-editor-fields>label:nth-child(3)){width:min(620px,calc(100vw - 32px))}
+/* Native top-layer dialogs are centered independently of page layout. */
+.inline-editor-dialog{position:fixed;inset:0;margin:auto!important;max-height:calc(100dvh - 48px)}
+.footer-copyright{display:inline-flex;align-items:center;gap:5px;flex-wrap:wrap}
+.footer-copyright .footer-admin-lock{position:static;display:inline-flex;align-items:center;justify-content:center;background:transparent;border:0;flex-shrink:0;padding:0;cursor:pointer}
+.inline-edit-pencil{width:auto;min-width:22px;padding:3px 7px;border-radius:5px;gap:5px;font:10px/1.2 Arial,sans-serif;text-transform:none}
+.inline-edit-pencil::after{content:'Edit'}
