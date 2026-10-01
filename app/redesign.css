@@ -41,7 +41,7 @@ em{color:var(--gold)}
 .welcome{border-color:var(--line)}.welcome strong{color:#f0e3ce}.stats b{color:var(--gold)}.stats span{color:#b2bdce}
 .concert-art{background:radial-gradient(ellipse at top right,#95724438,transparent 65%),#232333;border-color:#605369;border-radius:8px}.concert-art em{color:#e8bb7d}.concert-kicker,.concert-art .eyebrow{color:#bdb0d0}
 .concert-copy .under-link{color:var(--blue)}
-.ensembles{background:#161c27;border-color:#303b4d}.ensemble-card{background:#1b2330;border-color:#354154;border-radius:7px}.ensemble-card:hover{background:#253247;border-color:#8cabc7}.ensemble-card h3{color:#f3ece0}.ensemble-card>span:last-child{color:#b3c3db}.ensemble-num{color:#91a6c2}
+.ensembles{background:#161c27;border-color:#303b4d}.ensembles>.section-heading{max-width:1240px;margin-inline:auto}.ensemble-card{background:#1b2330;border-color:#354154;border-radius:7px}.ensemble-card:hover{background:#253247;border-color:#8cabc7}.ensemble-card h3{color:#f3ece0}.ensemble-card>span:last-child{color:#b3c3db}.ensemble-num{color:#91a6c2}
 .fundraiser{background:linear-gradient(145deg,#243043,#1b2330 65%);border:1px solid #354154;border-radius:8px;box-shadow:0 12px 32px #0002}.fundraiser h2{color:var(--text)}.fundraiser>svg{color:var(--gold)}.fundraiser .eyebrow{color:var(--gold)}
 .calendar-widget{min-width:0}.calendar-widget .section-heading>svg{color:#9bb6df}.date span,.event>div>span{color:#b5c3d7}.event{border-color:#354156}
 .support-gallery{width:100%;background:linear-gradient(180deg,#141820,#101218);border-bottom:1px solid #ffffff0c}
