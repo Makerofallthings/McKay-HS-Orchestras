@@ -10,7 +10,7 @@ export default function HandbookReader(){
  const heading=useRef<HTMLHeadingElement>(null);
  const titles=[...handbookSections.map(s=>s.title),'2021–2022 concert dates','Original handbook PDF'];
  const chapter=handbookSections[page];
- const go=(next:number)=>{setPage(next);setContentsOpen(false);requestAnimationFrame(()=>{heading.current?.focus({preventScroll:true});heading.current?.scrollIntoView({behavior:'instant',block:'start'});});};
+ const go=(next:number)=>{setPage(next);setContentsOpen(false);requestAnimationFrame(()=>{heading.current?.focus({preventScroll:true});});};
  return <div className="handbook-layout">
   <button className="mobile-guide-toggle" aria-expanded={contentsOpen} aria-controls="handbook-contents" onClick={()=>setContentsOpen(value=>!value)}>Browse handbook chapters <span aria-hidden="true">{contentsOpen?'−':'+'}</span></button>
   <nav id="handbook-contents" className={'handbook-index'+(contentsOpen?' is-open':'')} aria-label="Handbook chapters"><span className="eyebrow">IN THIS GUIDE</span>{titles.map((title,index)=><button key={title} aria-current={page===index?'page':undefined} onClick={()=>go(index)}><span>{String(index+1).padStart(2,'0')}</span>{title}</button>)}</nav>
