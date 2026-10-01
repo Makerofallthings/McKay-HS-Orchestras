@@ -21,6 +21,22 @@ service cloud.firestore {
    allow create, update: if admin() && validEvent();
    allow delete: if admin();
   }
+  match /site/content {
+   allow read: if true;
+   allow create, update: if admin()
+    && request.resource.data.keys().hasAll(['copy','links','assets','studentCount','enabledEnsembles','version','updatedAt'])
+    && request.resource.data.keys().hasOnly(['copy','links','assets','studentCount','enabledEnsembles','version','updatedAt'])
+    && request.resource.data.copy is map && request.resource.data.copy.size() <= 600
+    && request.resource.data.links is map && request.resource.data.links.size() <= 100
+    && request.resource.data.assets is map && request.resource.data.assets.size() <= 100
+    && request.resource.data.studentCount is int && request.resource.data.studentCount >= 0 && request.resource.data.studentCount <= 10000
+    && request.resource.data.enabledEnsembles is list
+    && request.resource.data.enabledEnsembles.size() <= 4
+    && request.resource.data.enabledEnsembles.hasOnly(['chamber-ensemble','advanced-symphony','string-ensemble','concert-orchestra'])
+    && request.resource.data.version is int && request.resource.data.version > 0
+    && request.resource.data.updatedAt == request.time;
+   allow delete: if false;
+  }
   match /admins/{uid} {
    allow get: if request.auth != null && request.auth.uid == uid;
    allow list, write: if false;

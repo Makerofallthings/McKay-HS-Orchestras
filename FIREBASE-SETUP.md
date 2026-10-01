@@ -29,6 +29,14 @@ The repository contains the rule configuration but does not publish rules automa
 
 ## Reminders: not activated yet
 
+## Website content administration
+
+The footer lock opens `/admin/`. Once signed in as an approved admin, an Admin navigation link appears. This panel edits public text, student count, and the visibility of the four existing ensembles. The ensemble total and tagged prose follow the selected groups automatically. Calendar editing is linked from this panel.
+
+Publish the updated `firestore.rules` file again to enable the `site/content` document. The calendar-only rules do not authorize website-content writes. The panel keeps changes in a local draft until Publish is clicked. Publication uses a transaction with version checks so simultaneous admins cannot silently overwrite one another.
+
+Text is rendered as plain text, never HTML. Original uploaded PDFs are separate documents and are not changed by editing the website's handbook or class-sheet text. Image URLs and public link destinations can be changed from the panel. Adding entirely new ensemble routes, replacing uploaded PDFs, uploading files to Firebase Storage, and changing 3D chair layouts still require additional implementation. Email/text reminders remain a separate unfinished integration.
+
 Reminder settings currently save a preview on the visitor's device. They do not register a subscription or send messages.
 
 The production system still needs verified contact enrollment, consent, private subscription records, an unsubscribe/manage link, scheduled Cloud Functions, delivery jobs with duplicate protection, and email/SMS provider credentials held in server secrets. Event changes and cancellations must reschedule or cancel pending jobs. Repeat reminders stop at the event start. Time calculations must respect the subscriber's time zone and daylight saving changes. Never expose subscriptions or allow public writes to an email delivery queue.

@@ -3,6 +3,7 @@ import "./globals.css";
 import "./redesign.css";
 import "./mobile.css";
 import { AudioPlayer } from "@/components/orchestra/Features";
+import {SiteContentProvider} from "@/components/orchestra/SiteContent";
 import RouteScroll from "@/components/orchestra/RouteScroll";
 
 const siteBasePath = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
@@ -27,7 +28,7 @@ export default function RootLayout({
   return (
     <html lang="en" data-scroll-behavior="smooth">
       <head><meta name="darkreader-lock" content=""/><meta name="color-scheme" content="dark"/></head>
-      <body className="antialiased"><RouteScroll/>{children}<AudioPlayer/></body>
+      <body className="antialiased"><SiteContentProvider><RouteScroll/>{children}<AudioPlayer/></SiteContentProvider></body>
     </html>
   );
 }
