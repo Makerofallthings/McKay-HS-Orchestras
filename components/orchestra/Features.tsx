@@ -20,13 +20,13 @@ export function CalendarWidget(){const [event,setEvent]=useState<Concert|null>(n
 export function FundraisingTracker(){const [burst,setBurst]=useState(0),[open,setOpen]=useState(false);const {raised,goal,isDemo}=siteConfig.campaign;const percent=Math.min(100,Math.round(raised/goal*100));return <div id="support" className="fundraiser"><Heart size={25} strokeWidth={1.5}/><span className="eyebrow">HELP OUR NEXT CHAPTER</span><h2>A little support.<br/>A lasting impact.</h2><p>Help put new music on every stand.</p><div className="fund-label"><b>New Sheet Music Fund</b><span>{percent}%</span></div><Progress value={percent} aria-label="Sheet music fundraising progress" className="h-1.5 bg-white/10 [&_[data-slot=progress-indicator]]:bg-[#91bd9b]"/><p className="mt-3"><strong>${raised.toLocaleString()}</strong> <span className="muted">of ${goal.toLocaleString()} · {isDemo?'Sample campaign':'raised'}</span></p><button className="button primary" onClick={()=>{setBurst(v=>v+1);setOpen(true)}}>Donate with PayPal <Heart size={16}/></button>{burst>0&&<div className="burst" key={burst} aria-hidden="true">{Array.from({length:18},(_,i)=><i key={i} style={{'--a':`${i*20}deg`} as CSSProperties}/>)}</div>}<Dialog open={open} onOpenChange={setOpen}><DialogContent><DialogTitle className="dialog-title">Help the music continue.</DialogTitle><DialogDescription className="dialog-copy">Thank you for supporting McKay. Continue to the program’s existing PayPal donation page. The campaign total shown in this design is illustrative; clicking does not record a donation.</DialogDescription><a className="button primary" href={siteConfig.paypalUrl||siteConfig.officialUrl} target="_blank" rel="noreferrer">Continue to PayPal <ArrowUpRight size={17}/></a></DialogContent></Dialog></div>}
 
 const carouselImages=[
+ {src:assetPath('/images/mckay-concert-stage.jpg'),alt:'McKay orchestra concert',caption:'Another amazing evening with the McKay Orchestras.'},
+ {src:assetPath('/images/mckay-orchestra-group.jpg'),alt:'McKay orchestra students celebrating with their state championship award',caption:'Celebrating our 2025–26 third-place finish at the State Championships.'},
+ {src:assetPath('/images/mckay-chicago.jpeg'),alt:'McKay orchestra group at Cloud Gate in Chicago',caption:'2024–25 Chicago Chamber Orchestra Trip.'},
+ {src:assetPath('/images/mckay-forest-group.jpg'),alt:'McKay orchestra community gathered among tall trees',caption:'Silver Falls State Park Rehearsal & Bonding Trip.'},
+ {src:assetPath('/images/mckay-beach-2026.jpeg'),alt:'McKay orchestra students together at the beach in Newport, Oregon',caption:'2025–26 Newport, Oregon Orchestra Festival Trip.'},
  {src:assetPath('/images/mckay-performance-2026.jpeg'),alt:'McKay orchestra performing together on stage',caption:'Every section. One sound.'},
- {src:assetPath('/images/mckay-concert-stage.jpg'),alt:'McKay orchestra concert',caption:'Made for moments like this.'},
- {src:assetPath('/images/mckay-orchestra-group.jpg'),alt:'McKay orchestra students',caption:'More than an orchestra.'},
- {src:assetPath('/images/mckay-beach-2026.jpeg'),alt:'McKay orchestra students together at the beach',caption:'Memories beyond the music.'},
- {src:assetPath('/images/mckay-chicago.jpeg'),alt:'McKay orchestra group at Cloud Gate in Chicago',caption:'The music takes us places.'},
  {src:assetPath('/images/mckay-state-2025.jpeg'),alt:'McKay orchestra performing at the OSAA State Championships',caption:'Taking the state stage.'},
- {src:assetPath('/images/mckay-forest-group.jpg'),alt:'McKay orchestra community gathered among tall trees',caption:'Growing together.'},
 ];
 export function ImageCarousel(){
  const [index,setIndex]=useState(0);
