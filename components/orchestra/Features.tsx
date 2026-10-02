@@ -34,7 +34,7 @@ export function ImageCarousel(){
  const [index,setIndex]=useState(0);
  const image=carouselImages[index];
  return <div className="image-carousel" role="region" aria-roledescription="carousel" aria-label="McKay orchestra gallery">
-  <div className="carousel-frame"><SiteImage src={image.src} alt={image.alt}/><span className="gallery-overline"><SiteText fallback="LIFE AT McKAY"/></span></div>
+  <div className="carousel-frame"><SiteImage editable={false} src={image.src} alt={image.alt}/><span className="gallery-overline"><SiteText editable={false} fallback="LIFE AT McKAY"/></span></div>
   <div className="gallery-toolbar">
    <div className="gallery-description" aria-live="polite"><span><SiteText fallback={String(index+1).padStart(2,'0')}/> / <SiteText fallback={String(carouselImages.length).padStart(2,'0')}/></span><strong><SiteText fallback={image.caption}/></strong></div>
    <div className="gallery-controls"><button aria-label="Previous photo" onClick={()=>setIndex(i=>(i-1+carouselImages.length)%carouselImages.length)}>←</button><button aria-label="Next photo" onClick={()=>setIndex(i=>(i+1)%carouselImages.length)}>→</button></div>
@@ -43,3 +43,4 @@ export function ImageCarousel(){
 }
 
 export function Widgets(){return <section className="support-gallery" aria-label="Support the music and explore our community"><div className="section-wrap support-gallery-inner"><FundraisingTracker/><ImageCarousel/></div></section>}
+
